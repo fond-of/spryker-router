@@ -19,9 +19,7 @@ class ResourceNotFoundResourceCreatorPlugin implements ResourceCreatorPluginInte
     protected $isDefault;
 
     /**
-     * RedirectInternalResourceCreatorPlugin constructor.
-     *
-     * @param  bool  $isDefault
+     * @param bool $isDefault
      */
     public function __construct(bool $isDefault = false)
     {
@@ -54,7 +52,7 @@ class ResourceNotFoundResourceCreatorPlugin implements ResourceCreatorPluginInte
     }
 
     /**
-     * @param  \Symfony\Component\HttpFoundation\Request  $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return void
      */
@@ -64,7 +62,9 @@ class ResourceNotFoundResourceCreatorPlugin implements ResourceCreatorPluginInte
     }
 
     /**
-     * @param  \Symfony\Component\HttpFoundation\Request  $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return void
      */
     protected function setErrorTemplate(Request $request): void
     {

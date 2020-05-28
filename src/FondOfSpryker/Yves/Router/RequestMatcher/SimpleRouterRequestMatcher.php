@@ -14,21 +14,19 @@ class SimpleRouterRequestMatcher implements RequestMatcherInterface
     protected $requestMatcherPlugins;
 
     /**
-     * SimpleRouterRequestMatcher constructor.
-     *
-     * @param  \FondOfSpryker\Yves\Router\Dependency\Plugin\RequestMatcherPluginInterface[]  $requestMatcherPlugins
+     * @param \FondOfSpryker\Yves\Router\Dependency\Plugin\RequestMatcherPluginInterface[] $requestMatcherPlugins
      */
-    public function __construct(
-        array $requestMatcherPlugins
-    ) {
+    public function __construct(array $requestMatcherPlugins)
+    {
         $this->requestMatcherPlugins = $requestMatcherPlugins;
     }
 
     /**
-     * @param  \Symfony\Component\HttpFoundation\Request  $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @throws \Symfony\Component\Routing\Exception\ResourceNotFoundException
      *
      * @return array
-     * @throws \Exception
      */
     public function matchRequest(Request $request): array
     {
@@ -39,6 +37,8 @@ class SimpleRouterRequestMatcher implements RequestMatcherInterface
             }
         }
 
-        throw new ResourceNotFoundException();
+        $info = "this request\n$request";
+
+        throw new ResourceNotFoundException("None of the routers in the chain matched $info");
     }
 }

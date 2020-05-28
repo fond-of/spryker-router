@@ -14,9 +14,7 @@ class RedirectResourceCreatorPlugin implements ResourceCreatorPluginInterface
     protected $isDefault;
 
     /**
-     * RedirectInternalResourceCreatorPlugin constructor.
-     *
-     * @param  bool  $isDefault
+     * @param bool $isDefault
      */
     public function __construct(bool $isDefault = false)
     {
@@ -49,13 +47,11 @@ class RedirectResourceCreatorPlugin implements ResourceCreatorPluginInterface
     }
 
     /**
-     * @param  \Symfony\Component\HttpFoundation\Request  $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return void
      */
     public function modifyRequest(Request $request): void
     {
     }
-
-
 }
