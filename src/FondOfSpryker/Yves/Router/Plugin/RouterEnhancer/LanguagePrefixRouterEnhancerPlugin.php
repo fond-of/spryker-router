@@ -2,19 +2,17 @@
 
 namespace FondOfSpryker\Yves\Router\Plugin\RouterEnhancer;
 
+use FondOfSpryker\Yves\Router\DataProvider\DataProviderInterface;
 use Spryker\Yves\Router\Plugin\RouterEnhancer\LanguagePrefixRouterEnhancerPlugin as SprykerLanguagePrefixRouterEnhancerPlugin;
 use Symfony\Component\Routing\RequestContext;
 
 /**
- * @method \FondOfSpryker\Yves\Router\RouterConfig getConfig()
+ * @method \Spryker\Yves\Router\RouterConfig getConfig()
  * @method \FondOfSpryker\Yves\Router\RouterFactory getFactory()
  */
 class LanguagePrefixRouterEnhancerPlugin extends SprykerLanguagePrefixRouterEnhancerPlugin
 {
-    /**
-     * @var array
-     */
-    protected $availableLocales;
+    protected $storeDataProvder;
 
     /**
      * @param string $locale
@@ -23,7 +21,7 @@ class LanguagePrefixRouterEnhancerPlugin extends SprykerLanguagePrefixRouterEnha
      */
     protected function getLanguageFromLocale(string $locale): string
     {
-        $language = array_search($locale, $this->getAvailableLocales());
+        $language = $this->getStoreDataProvider()->getLanguageFromLocale($locale);
 
         if ($language === null) {
             $language = parent::getLanguageFromLocale($locale);
@@ -40,7 +38,7 @@ class LanguagePrefixRouterEnhancerPlugin extends SprykerLanguagePrefixRouterEnha
     protected function findLanguage(RequestContext $requestContext): ?string
     {
         $language = parent::findLanguage($requestContext);
-        $availableLocales = $this->getAvailableLocales();
+        $availableLocales = $this->getStoreDataProvider()->getAvailableLocales();
         if (!array_key_exists($language, $availableLocales)) {
             foreach ($availableLocales as $lang => $locale) {
                 if (substr($locale, 0, strlen($language)) === $language) {
@@ -55,14 +53,14 @@ class LanguagePrefixRouterEnhancerPlugin extends SprykerLanguagePrefixRouterEnha
     }
 
     /**
-     * @return array
+     * @return \FondOfSpryker\Yves\Router\DataProvider\DataProviderInterface
      */
-    protected function getAvailableLocales(): array
+    protected function getStoreDataProvider(): DataProviderInterface
     {
-        if ($this->availableLocales === null) {
-            $this->availableLocales = $this->getFactory()->getStoreInstance()->getLocales();
+        if ($this->storeDataProvder === null) {
+            $this->storeDataProvder = $this->getFactory()->createStoreDataProvider();
         }
 
-        return $this->availableLocales;
+        return $this->storeDataProvder;
     }
 }
