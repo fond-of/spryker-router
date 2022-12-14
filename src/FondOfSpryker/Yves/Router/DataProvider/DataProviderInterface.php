@@ -10,7 +10,7 @@ interface DataProviderInterface
     public function getAvailableLocales(): array;
 
     /**
-     * @param  string  $locale
+     * @param string $locale
      *
      * @return string|null
      */

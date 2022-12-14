@@ -12,6 +12,9 @@ use Symfony\Component\Routing\RequestContext;
  */
 class LanguagePrefixRouterEnhancerPlugin extends SprykerLanguagePrefixRouterEnhancerPlugin
 {
+    /**
+     * @var \FondOfSpryker\Yves\Router\DataProvider\DataProviderInterface
+     */
     protected $storeDataProvder;
 
     /**
