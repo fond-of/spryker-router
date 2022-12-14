@@ -13,11 +13,6 @@ use Symfony\Component\Routing\Route;
 class StoreDefaultPostAddRouteManipulatorPlugin extends AbstractPlugin implements PostAddRouteManipulatorPluginInterface
 {
     /**
-     * @var string
-     */
-    protected $allowedLocalesPattern;
-
-    /**
      * @param string $routeName
      * @param \Symfony\Component\Routing\Route $route
      *
@@ -25,6 +20,7 @@ class StoreDefaultPostAddRouteManipulatorPlugin extends AbstractPlugin implement
      */
     public function manipulate(string $routeName, Route $route): Route
     {
+        // @phpstan-ignore-next-line
         $route->setDefault('store', APPLICATION_STORE);
 
         return $route;

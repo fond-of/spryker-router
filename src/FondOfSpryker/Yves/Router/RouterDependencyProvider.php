@@ -2,17 +2,18 @@
 
 namespace FondOfSpryker\Yves\Router;
 
-use FondOfSpryker\Yves\Router\Dependency\Client\RouterToSessionClientBridge;
-use FondOfSpryker\Yves\Router\Dependency\Client\RouterToStoreClientBridge;
 use Spryker\Shared\Kernel\Store;
-use Spryker\Yves\Router\RouterDependencyProvider as SprykerRouterDependencyProvider;
 use Spryker\Yves\Kernel\Container;
+use Spryker\Yves\Router\RouterDependencyProvider as SprykerRouterDependencyProvider;
 
 /**
  * @method \Spryker\Yves\Router\RouterConfig getConfig()
  */
 class RouterDependencyProvider extends SprykerRouterDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const DIRTY_STORE_INSTANCE = 'DIRTY_STORE_INSTANCE';
 
     /**
